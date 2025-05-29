@@ -41,6 +41,12 @@ h2 {
   margin: 2rem 0 0;
 }
 
+h3 {
+  line-height: 1.5rem;
+  font-weight: normal;
+  margin: 0;
+}
+
 p {
   margin: 0.75rem 0;
 }
