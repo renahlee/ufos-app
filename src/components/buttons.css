@@ -1,0 +1,46 @@
+
+/*button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  color: #64ff6c;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-family: inherit;
+  background-color: #100813;
+  cursor: pointer;
+  transition: border-color 0.19s;
+}
+button:hover {
+  border-color: #646cff;
+}
+*/
+button:focus-visible {
+  cursor: pointer;
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+button {
+  font: inherit;
+}
+
+button.subtle {
+  background: transparent;
+  border: 0;
+  padding: 0 0.5rem;
+  transition: background 0.19s, color 0.19s;
+}
+button.subtle:hover {
+  color: inherit;
+  background: hsla(0, 0%, 0%, 0.3);
+}
+
+.button-group > button {
+  color: #888;
+}
+.button-group > button.current {
+  font-weight: bold;
+  color: #99bb77;
+}
+.button-group > button.current.subtle {
+  background: hsla(0, 0%, 0%, 0.2);
+}

@@ -2,9 +2,17 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
+  position: relative;
 }
 
 .header {
   display: flex;
   align-items: baseline;
+}
+
+.dev-mode {
+  opacity: 0.666;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
