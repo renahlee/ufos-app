@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react'
 import { ButtonGroup } from './components/buttons'
 import { NsidTitle, NsidNice } from './components/nsid'
+import { Sparkline } from './components/sparkline'
 import { Fetch } from './fetch'
 import { HostContext } from './context'
 
@@ -41,7 +42,6 @@ async function get_whats_hot(host, period) {
 
 export function WhatsHot() {
   const [period, setPeriod] = useState('day');
-
   const host = useContext(HostContext);
   return (
     <>
@@ -89,7 +89,6 @@ function Hot({ hot, rank }) {
       borderRadius: '0.6em',
       width: '19rem',
       display: 'flex',
-      gap: '0.3rem',
       overflow: 'hidden',
     }}>
       <span style={{
@@ -108,7 +107,7 @@ function Hot({ hot, rank }) {
         {rank}
       </span>
       <div style={{
-        padding: '0.3rem 0.3rem',
+        padding: '0.3rem 0.3rem 0.3rem 0.1rem',
         width: '100%',
       }}>
         <div style={{ marginBottom: '0.4rem'}}>
@@ -117,28 +116,35 @@ function Hot({ hot, rank }) {
             <NsidNice nsid={hot.current.nsid} subtle={true} />
           </p>
         </div>
-        <p style={{
-          margin: '0',
-          textAlign: 'right',
-          fontSize: '0.8rem',
-          lineHeight: '0.8rem',
+        <div style={{
+          display: 'flex',
+          alignItems: 'flex-end',
         }}>
-          <strong>{hot.current.dids_estimate}</strong>
-          <span style={{ color: '#ccc' }}> active </span>
-          <span style={{
+          <Sparkline nsid={hot.current.nsid} />
+          <p style={{
+            margin: '0',
+            textAlign: 'right',
             fontSize: '0.8rem',
-            background: 'hsla(0, 0%, 0%, 0.3)',
-            color: hot.change > 0.9
-              ? 'yellow'
-              : hot.change > 0
-                ? '#64ff6c'
-                : 'inherit',
-            borderRadius: '0.3rem',
-            padding: '0 0.2rem 0 0.1rem',
+            lineHeight: '0.8rem',
+            flexShrink: '0',
           }}>
-            {hot.change > 0 && '+'}{(hot.change * 100).toFixed()}%
-          </span>
-        </p>
+            <strong>{hot.current.dids_estimate}</strong>
+            <span style={{ color: '#ccc' }}> active </span>
+            <span style={{
+              fontSize: '0.8rem',
+              background: 'hsla(0, 0%, 0%, 0.3)',
+              color: hot.change > 0.9
+                ? 'yellow'
+                : hot.change > 0
+                  ? '#64ff6c'
+                  : 'inherit',
+              borderRadius: '0.3rem',
+              padding: '0 0.2rem 0 0.1rem',
+            }}>
+              {hot.change > 0 && '+'}{(hot.change * 100).toFixed()}%
+            </span>
+          </p>
+        </div>
       </div>
     </li>
   );

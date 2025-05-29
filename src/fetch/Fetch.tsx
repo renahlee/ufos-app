@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 
 const loadingDefault = () => (
-  <p><em>Loading&hellip;</em></p>
+  <em>Loading&hellip;</em>
 );
 
 const errorDefault = err => (
-  <p className="error">
+  <span className="error">
     <strong>Error</strong>:<br/>{`${err}`}
-  </p>
+  </span>
 );
 
 export function Fetch({ using, args, ok, loading, error }) {

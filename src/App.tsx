@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState } from 'react'
 import { HostContext } from './context'
 import { WhatsHot } from './WhatsHot'
 import './App.css'
