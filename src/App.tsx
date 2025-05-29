@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { HostContext } from './context'
 import { WhatsHot } from './WhatsHot'
+import { TopCollections } from './TopCollections'
 import './App.css'
 
 const UFOS_HOST_DEV = 'http://localhost:9999';
@@ -32,6 +33,7 @@ function App() {
       </div>
       <p>Samples and stats for every <a href="https://atproto.com/guides/lexicon" target="_blank">lexicon</a> observed in the ATmosphere</p>
       <WhatsHot />
+      <TopCollections />
     </HostContext.Provider>
   )
 }

@@ -6,8 +6,8 @@ const getBits = nsid => {
   const tld = segments.length > 2 ? segments[0] : null; // assumed; todo: psl
   const app = segments.length > 2 ? segments[1] : segments[0];
   const mids = segments.length > 4
-    ? segments.slice(2, segments.length - 2).join('.')
-    : null;
+    ? segments.slice(2, segments.length - 2)
+    : [];
   const group = segments.length > 3 ? segments.at(-2) : null;
   const name = segments.at(-1);
   return { tld, app, mids, group, name };
@@ -38,7 +38,7 @@ export function NsidNice({ nsid, subtle }) {
     <span className={`nsid-nice ${subtle ? 'subtle' : ''}`}>
       {tld && (<><span className="nsid-tld">{tld}</span>.</>)}
       {app && (<><span className="nsid-app">{app}</span>.</>)}
-      {mids && (<><span className="nsid-mids">{mids.join('.')}</span>.</>)}
+      {mids.length > 0 && (<><span className="nsid-mids">{mids.join('.')}</span>.</>)}
       {group && (<><span className="nsid-group">{group}</span>.</>)}
       {name && (<span className="nsid-name">{name}</span>)}
     </span>
