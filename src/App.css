@@ -10,9 +10,18 @@
   align-items: baseline;
 }
 
-.dev-mode {
+.header h1 a {
+  color: #fff;
+}
+
+.dev-shortcut {
   opacity: 0.666;
   position: absolute;
   top: 0;
   right: 2rem;
+}
+
+.dev-shortcut a.active  {
+  color: yellow;
+  font-weight: bold;
 }

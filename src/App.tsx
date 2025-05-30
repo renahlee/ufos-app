@@ -1,14 +1,13 @@
 import { useState } from 'react'
+import { NavLink } from 'react-router'
 import { HostContext } from './context'
-import { WhatsHot } from './WhatsHot'
-import { TopCollections } from './TopCollections'
 import './App.css'
 
 const UFOS_HOST_DEV = 'http://localhost:9999';
 const UFOS_HOST_PROD = 'https://ufos-api.microcosm.blue';
 const INTIAL_HOST = localStorage.getItem('ufos-api-host') || UFOS_HOST_PROD;
 
-function App() {
+function App({ children }) {
   const [ufosHost, setUfosHost] = useState(INTIAL_HOST);
 
   const setDev = en => {
@@ -20,20 +19,31 @@ function App() {
 
   return (
     <HostContext.Provider value={ufosHost}>
-      <label className="dev-mode">
-        <input
-          type="checkbox"
-          onChange={e => setDev(e.target.checked)}
-          checked={isDev(ufosHost)}
-        />
-        dev api
-      </label>
+      <div className="dev-shortcut">
+        api:
+        {' '}
+        <NavLink to="/status">status</NavLink>
+        {' | '}
+        <label>
+          <input
+            type="checkbox"
+            onChange={e => setDev(e.target.checked)}
+            checked={isDev(ufosHost)}
+          />
+          localhost
+        </label>
+      </div>
       <div className="header">
-        <h1>🛸 UFOs&nbsp;</h1>
+        <h1>
+          <NavLink to="/">
+            🛸 UFOs
+          </NavLink>
+        </h1>
       </div>
       <p>Samples and stats for every <a href="https://atproto.com/guides/lexicon" target="_blank">lexicon</a> observed in the ATmosphere</p>
-      <WhatsHot />
-      <TopCollections />
+
+      {children}
+
     </HostContext.Provider>
   )
 }

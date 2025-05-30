@@ -1,9 +1,9 @@
 import { useContext, useState } from 'react'
-import { ButtonGroup } from './components/buttons'
-import { NsidTitle, NsidNice } from './components/nsid'
-import { Sparkline } from './components/sparkline'
-import { Fetch } from './fetch'
-import { HostContext } from './context'
+import { ButtonGroup } from '../../components/buttons'
+import { NsidTitle, NsidNice } from '../../components/nsid'
+import { Sparkline } from '../../components/sparkline'
+import { Fetch } from '../../fetch'
+import { HostContext } from '../../context'
 
 const ONE_HOUR_MS = 60 * 60 * 1000;
 const ONE_DAY_MS = ONE_HOUR_MS * 24;
@@ -18,7 +18,7 @@ async function get_top_collections(host, period) {
   const period_ms = { day: ONE_DAY_MS, week: ONE_WEEK_MS }[period]!;
   const since = new Date(now_truncated - period_ms).toISOString();
 
-  const q = `limit=99&since=${since}`;
+  const q = `limit=8&since=${since}`;
   const r = await fetch(`${host}/collections?order=dids-estimate&${q}`);
   if (!r.ok) {
     throw new Error(`request failed: ${r}`);

@@ -1,9 +1,9 @@
 import { useContext, useState } from 'react'
-import { ButtonGroup } from './components/buttons'
-import { NsidTitle, NsidNice } from './components/nsid'
-import { Sparkline } from './components/sparkline'
-import { Fetch } from './fetch'
-import { HostContext } from './context'
+import { ButtonGroup } from '../../components/buttons'
+import { NsidTitle, NsidNice } from '../../components/nsid'
+import { Sparkline } from '../../components/sparkline'
+import { Fetch } from '../../fetch'
+import { HostContext } from '../../context'
 
 const ONE_HOUR_MS = 60 * 60 * 1000;
 const ONE_DAY_MS = ONE_HOUR_MS * 24;
