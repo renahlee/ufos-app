@@ -6,6 +6,7 @@ import './index.css'
 import App from './App.tsx'
 import { Home } from './pages/home';
 import { Status } from './pages/status';
+import { Collection } from './pages/collection';
 
 
 createRoot(document.getElementById('root')!).render(
@@ -15,7 +16,7 @@ createRoot(document.getElementById('root')!).render(
         <Routes>
           <Route index element={<Home />} />
           <Route path="/status" element={<Status />} />
-          <Route path="/collection" element={<p>lex</p>} />
+          <Route path="/collection" element={<Collection />} />
         </Routes>
       </App>
     </BrowserRouter>

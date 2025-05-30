@@ -19,14 +19,14 @@ const niceDt = dt => {
     return `${dt.toFixed(1)}s`;
   }
   dt /= 60; // minutes
-  const s = (dt % 1) * 60;
+  const s = Math.round((dt % 1) * 60);
   let m = Math.floor(dt);
   if (dt < 60) {
-    return `${m}m${Math.round(s)}s`;
+    return `${m}m${s}s`;
   }
   dt /= 60; // hours
   m %= 60;
-  return `${dt.toLocaleString()}h${m}m${s}s`;
+  return `${Math.floor(dt).toLocaleString()}h${m}m${s}s`;
 }
 
 const Cursor = ({ cursor }) => {
