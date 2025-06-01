@@ -39,8 +39,9 @@ function App({ children }) {
             🛸 UFOs
           </NavLink>
         </h1>
+        &nbsp;
+        <p>Explore <a href="https://atproto.com/guides/lexicon" target="_blank">lexicons</a></p>
       </div>
-      <p>Samples and stats for every <a href="https://atproto.com/guides/lexicon" target="_blank">lexicon</a> observed in the ATmosphere</p>
 
       {children}
 

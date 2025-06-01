@@ -1,23 +1,26 @@
 .nsid-nice.subtle {
   opacity: 0.5;
 }
-
 .nsid-nice.subtle:hover {
   opacity: 0.8;
 }
-
-.nsid-nice.subtle:hover .nsid-tld {
+.nsid-nice.subtle:hover .nsid-tld,
+.nsid-nice:not(.subtle) .nsid-tld {
   color: hsl(330, 81%, 60%);
 }
-.nsid-nice.subtle:hover .nsid-app {
+.nsid-nice.subtle:hover .nsid-app,
+.nsid-nice:not(.subtle) .nsid-app {
   color: hsl(280, 94%, 72%);
 }
-.nsid-nice.subtle:hover .nsid-mids {
+.nsid-nice.subtle:hover .nsid-mids,
+.nsid-nice:not(.subtle) .nsid-mids {
   color: hsl(0, 0%, 72%);
 }
-.nsid-nice.subtle:hover .nsid-group {
+.nsid-nice.subtle:hover .nsid-group,
+.nsid-nice:not(.subtle) .nsid-group {
   color: hsl(210, 94%, 72%);
 }
-.nsid-nice.subtle:hover .nsid-name {
+.nsid-nice.subtle:hover .nsid-name,
+.nsid-nice:not(.subtle) .nsid-name {
   color: hsl(190, 86%, 72%);
 }
