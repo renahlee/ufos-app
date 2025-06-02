@@ -36,7 +36,6 @@
 }
 
 .json-string button.string-more {
-  cursor: pointer;
   line-height: 1rem;
   display: inline-block;
   border-radius: 0.4rem;

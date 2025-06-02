@@ -52,7 +52,7 @@ function Pair({ k, v, d }) {
         :
       </div>
       <div style={
-        !inline && d > OBJ_INLINE_MAX_DEPTH
+        !inline && (Array.isArray(v) || d > OBJ_INLINE_MAX_DEPTH)
           ? {paddingLeft: '2rem'}
           : {}
       }>

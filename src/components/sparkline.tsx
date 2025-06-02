@@ -12,7 +12,7 @@ const get_timeseries = async (host, nsid) => {
   return await resp.json();
 }
 
-export function Sparkline({ nsid, metric }) {
+export function Sparkline({ nsid, metric, height }) {
   metric = metric ?? 'dids_estimate';
   const host = useContext(HostContext);
   return (
@@ -22,7 +22,7 @@ export function Sparkline({ nsid, metric }) {
       ok={({ series }) => (
         <SparkLineChart
           data={series[nsid].map(d => d[metric])}
-          height={32}
+          height={height ?? 32}
         />
       )}
     />

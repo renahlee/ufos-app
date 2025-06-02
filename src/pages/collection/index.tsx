@@ -5,7 +5,9 @@ import { NsidNice } from '../../components/nsid';
 import { niceDt } from '../../components/nice';
 import { Sparkline } from '../../components/sparkline';
 import { Record } from '../../components/record';
+import { ButtonGroup } from '../../components/buttons';
 import { Fetch } from '../../fetch';
+import './collection.css';
 
 async function get_samples(host, nsid, limit) {
   const res = await fetch(`${host}/records?collection=${nsid}&limit=${limit}`);
@@ -15,41 +17,120 @@ async function get_samples(host, nsid, limit) {
   return await res.json();
 }
 
+async function get_collection_stat(host, nsid, period) {
+  const res = await fetch(`${host}/records/total-seen?collection=${nsid}`);
+  if (!res.ok) {
+    throw new Error(`request failed: ${res}`);
+  }
+  const data = await res.json();
+  return data[nsid];
+}
+
 export function Collection({}) {
   const host = useContext(HostContext);
   const [showMore, setShowMore] = useState(false);
+  const [statPeriod, setStatPeriod] = useState('daily');
+  const [statType, statStatType] = useState('estimated_dids');
+  const [countType, setCountType] = useState('creates');
   const [searchParams, _setSearchParams] = useSearchParams();
   const nsid = searchParams.get('nsid');
+
   return (
     <>
+      <h2>
+        <NsidNice nsid={nsid} />
+      </h2>
       <div style={{
         display: 'flex',
-        alignItems: 'flex-end',
+        alignItems: 'center',
+        margin: '0.5rem 0',
+        gap: '0.5rem',
       }}>
-        <h2>
-          <NsidNice nsid={nsid} />
-        </h2>
-        &nbsp;
-        <div style={{width: '9rem'}}>
-          <Sparkline nsid={nsid} />
+        <div style={{
+          width: '12rem',
+          background: '#111',
+        }}>
+          <Sparkline nsid={nsid} height={56} />
         </div>
+
+        <span className="big-stat">
+          <Fetch
+            using={get_collection_stat}
+            args={[host, nsid, statPeriod]}
+            ok={data => {
+              let n = '??';
+              if (statType === 'estimated_dids') {
+                n = data.dids_estimate;
+              } else if (countType === 'creates') {
+                n = data.total_creates;
+              } else if (countType === 'updated') {
+                // n = data.updates;
+              } else {
+                // n = data.deletes;
+              }
+              return n.toLocaleString();
+            }}
+          />
+        </span>
+
+        <ButtonGroup
+          options={[{val: 'daily'}, {val: 'weekly'}]}
+          current={statPeriod}
+          onChange={p => setStatPeriod(p)}
+          subtle
+          vertical
+        />
+        <ButtonGroup
+          options={[
+            {val: 'estimated_dids', label: 'users'},
+            {val: 'records', label: 'records'},
+          ]}
+          current={statType}
+          onChange={t => statStatType(t)}
+          subtle
+          vertical
+        />
+        {statType === 'records' && (
+          <ButtonGroup
+            options={[
+              {val: 'creates', label: 'created'},
+              {val: 'updates', label: 'updated'},
+              {val: 'deletes', label: 'deleted'},
+            ]}
+            current={countType}
+            onChange={t => setCountType(t)}
+            subtle
+            vertical
+          />
+        )}
 
       </div>
 
-      <h3 style={{marginTop: '2rem'}}>Sample record: latest</h3>
+      <h3 style={{margin: '2rem 0 1rem'}}>
+        {showMore ? 'Sample records' : 'Sample record: latest'}
+      </h3>
       <Fetch
         using={get_samples}
         args={[host, nsid, 1]}
         ok={samples => samples.length === 0
           ? <p><em>no records seen</em></p>
           : showMore
-            ? samples.map(s => (
-              <Sample
-                key={`${s.did}/${s.rkey}`}
-                sample={s}
-                nsid={nsid}
-              />
-            ))
+            ? (
+              <>
+              {samples.map(s => (
+                <Sample
+                  key={`${s.did}/${s.rkey}`}
+                  sample={s}
+                  nsid={nsid}
+                />
+              ))}
+              {samples.length > 1 && (
+                <button onClick={() => setShowMore(false)}>
+                  - hide samples
+                </button>
+              )}
+              </>
+            )
             : (
               <>
                 <Sample
@@ -59,7 +140,7 @@ export function Collection({}) {
                 />
                 {samples.length > 1 && (
                   <button onClick={() => setShowMore(true)}>
-                    show more
+                    + more samples
                   </button>
                 )}
               </>
