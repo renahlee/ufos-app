@@ -24,3 +24,7 @@
 .nsid-nice:not(.subtle) .nsid-name {
   color: hsl(190, 86%, 72%);
 }
+
+.nsid-bad-bit {
+  color: #c66;
+}

@@ -38,9 +38,9 @@ function App({ children }) {
           <NavLink to="/">
             🛸 UFOs
           </NavLink>
+          &nbsp;
         </h1>
-        &nbsp;
-        <p>Explore <a href="https://atproto.com/guides/lexicon" target="_blank">lexicons</a></p>
+        <p>Explore lexicons</p>
       </div>
 
       {children}

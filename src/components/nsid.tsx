@@ -44,3 +44,17 @@ export function NsidNice({ nsid, subtle }) {
     </span>
   );
 }
+
+export function NsidBad({ nsid }) {
+  const { tld, app, mids, group, name } = getBits(nsid);
+  return (
+    <span className="nsid-bad">
+      ⚠️{' '}
+      {tld && (<><span className="nsid-bad-bit">{tld}</span>.</>)}
+      {app && (<><span className="nsid-bad-bit">{app}</span>.</>)}
+      {mids.length > 0 && (<><span className="nsid-bad-bit">{mids.join('.')}</span>.</>)}
+      {group && (<><span className="nsid-bad-bit">{group}</span>.</>)}
+      {name && (<span className="nsid-bad-bit">{name}</span>)}
+    </span>
+  );
+}

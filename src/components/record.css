@@ -1,0 +1,64 @@
+.record-type {
+  opacity: 0.667;
+}
+
+.record-type-ok {
+  font-weight: bold;
+  color: hsl(280, 94%, 72%);
+}
+
+.record-type-mismatch {
+  color: #c66;
+}
+
+.json-key-outer {
+  white-space: nowrap;
+  margin-right: 0.5rem;
+}
+.json-key-inner {
+  display: inline-block;
+  max-width: 14rem;
+  word-break: break-all;
+  flex-shrink: 0;
+  font-weight: bold;
+  color: hsl(280, 94%, 72%);
+}
+
+.json-string .content {
+  color: skyblue;
+  word-break: break-all;
+  whiteSpace: pre-wrap;
+}
+
+.json-string .content.showing-all:hover {
+  cursor: pointer;
+  color: #fff;
+}
+
+.json-string button.string-more {
+  cursor: pointer;
+  line-height: 1rem;
+  display: inline-block;
+  border-radius: 0.4rem;
+  border: none;
+  background: #555;
+  padding: 0 0.2rem 0.12rem;
+  vertical-align: center;
+  margin-left: 0.1rem;
+  letter-spacing: 0.1rem;
+  opacity: 0.5;
+  color: inherit;
+}
+
+.json-string button.string-more:hover {
+  color: skyblue;
+}
+
+.json-number {
+  color: hsl(330, 81%, 60%);
+}
+
+.json-array {
+  margin: 0;
+  padding: 0;
+}
