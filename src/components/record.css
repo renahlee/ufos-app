@@ -27,7 +27,7 @@
 .json-string .content {
   color: skyblue;
   word-break: break-all;
-  whiteSpace: pre-wrap;
+  white-space: pre-wrap;
 }
 
 .json-string .content.showing-all:hover {
