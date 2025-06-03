@@ -115,6 +115,7 @@ function Hot({ hot, rank }) {
         <div style={{
           padding: '0.3rem 0.3rem 0.3rem 0.1rem',
           width: '100%',
+          overflow: 'hidden',
         }}>
           <div style={{ marginBottom: '0.4rem'}}>
             <h3><NsidTitle nsid={hot.current.nsid} />{hot.change > 0.9 && '🔥'}</h3>

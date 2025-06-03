@@ -97,6 +97,7 @@ function Top({ top, rank }) {
       <div style={{
         padding: '0.3rem 0.3rem 0.3rem 0.1rem',
         width: '100%',
+        overflow: 'hidden',
       }}>
         <div style={{ marginBottom: '0.4rem'}}>
           <h3><NsidTitle nsid={top.nsid} /></h3>
