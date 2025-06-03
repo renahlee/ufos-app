@@ -9,6 +9,11 @@ import { ButtonGroup } from '../../components/buttons';
 import { Fetch } from '../../fetch';
 import './collection.css';
 
+// TODO refactor out with what-hot (/top collections, ...)
+const ONE_HOUR_MS = 60 * 60 * 1000;
+const ONE_DAY_MS = ONE_HOUR_MS * 24;
+const ONE_WEEK_MS = ONE_DAY_MS * 7;
+
 async function get_samples(host, nsid, limit) {
   const res = await fetch(`${host}/records?collection=${nsid}&limit=${limit}`);
   if (!res.ok) {
@@ -18,7 +23,12 @@ async function get_samples(host, nsid, limit) {
 }
 
 async function get_collection_stat(host, nsid, period) {
-  const res = await fetch(`${host}/records/total-seen?collection=${nsid}`);
+  const now_ms = +new Date();
+  const now_hours = Math.floor(now_ms / ONE_HOUR_MS);
+  const now_truncated = now_hours * ONE_HOUR_MS;
+  const period_ms = { day: ONE_DAY_MS, week: ONE_WEEK_MS }[period]!;
+  const since = new Date(now_truncated - period_ms).toISOString();
+  const res = await fetch(`${host}/collections/stats?collection=${nsid}&since=${since}`);
   if (!res.ok) {
     throw new Error(`request failed: ${res}`);
   }
@@ -29,7 +39,7 @@ async function get_collection_stat(host, nsid, period) {
 export function Collection({}) {
   const host = useContext(HostContext);
   const [showMore, setShowMore] = useState(false);
-  const [statPeriod, setStatPeriod] = useState('daily');
+  const [statPeriod, setStatPeriod] = useState('day');
   const [statType, statStatType] = useState('estimated_dids');
   const [countType, setCountType] = useState('creates');
   const [searchParams, _setSearchParams] = useSearchParams();
@@ -62,11 +72,11 @@ export function Collection({}) {
               if (statType === 'estimated_dids') {
                 n = data.dids_estimate;
               } else if (countType === 'creates') {
-                n = data.total_creates;
-              } else if (countType === 'updated') {
-                // n = data.updates;
+                n = data.creates;
+              } else if (countType === 'updates') {
+                n = data.updates;
               } else {
-                // n = data.deletes;
+                n = data.deletes;
               }
               return n.toLocaleString();
             }}
@@ -74,7 +84,10 @@ export function Collection({}) {
         </span>
 
         <ButtonGroup
-          options={[{val: 'daily'}, {val: 'weekly'}]}
+          options={[
+            {val: 'day', label: 'daily'},
+            {val: 'week', label: 'weekly',
+          }]}
           current={statPeriod}
           onChange={p => setStatPeriod(p)}
           subtle
