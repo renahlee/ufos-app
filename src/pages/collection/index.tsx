@@ -13,6 +13,7 @@ import './collection.css';
 const ONE_HOUR_MS = 60 * 60 * 1000;
 const ONE_DAY_MS = ONE_HOUR_MS * 24;
 const ONE_WEEK_MS = ONE_DAY_MS * 7;
+const ONE_MONTH_MS = ONE_WEEK_MS * 4;
 
 async function get_samples(host, nsid, limit) {
   const res = await fetch(`${host}/records?collection=${nsid}&limit=${limit}`);
@@ -26,7 +27,11 @@ async function get_collection_stat(host, nsid, period) {
   const now_ms = +new Date();
   const now_hours = Math.floor(now_ms / ONE_HOUR_MS);
   const now_truncated = now_hours * ONE_HOUR_MS;
-  const period_ms = { day: ONE_DAY_MS, week: ONE_WEEK_MS }[period]!;
+  const period_ms = {
+    day: ONE_DAY_MS,
+    week: ONE_WEEK_MS,
+    month: ONE_MONTH_MS,
+  }[period]!;
   const since = new Date(now_truncated - period_ms).toISOString();
   const res = await fetch(`${host}/collections/stats?collection=${nsid}&since=${since}`);
   if (!res.ok) {
@@ -86,8 +91,9 @@ export function Collection({}) {
         <ButtonGroup
           options={[
             {val: 'day', label: 'daily'},
-            {val: 'week', label: 'weekly',
-          }]}
+            {val: 'week', label: 'weekly'},
+            {val: 'month', label: 'monthly'},
+          ]}
           current={statPeriod}
           onChange={p => setStatPeriod(p)}
           subtle
