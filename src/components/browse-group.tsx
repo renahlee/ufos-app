@@ -24,7 +24,9 @@ export function BrowseGroup({ prefix, active }) {
       {parents.map(p => (
         <div>
           {'↰ '}
-          <NsidPrefix prefix={p} />
+          <Link to={`/collection?prefix=${p}`}>
+            <NsidPrefix prefix={p} />
+          </Link>
         </div>
       ))}
       <Fetch
