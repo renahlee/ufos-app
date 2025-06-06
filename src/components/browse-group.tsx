@@ -92,7 +92,7 @@ export function BrowseSubGroup({ prefix }) {
         args={[host, prefix]}
         ok={data => data.children.map(c => {
           if (c.type === 'collection') {
-            return <Collection key={`c:${c.nsid}`} c={c} marker={<>&nbsp;&nbsp;↳ </>} />;
+            return <Collection key={`c:${c.nsid}`} c={c} marker={<>&nbsp;&nbsp;↳&nbsp;</>} />;
           } else {
             return <SubPrefix key={`p:${c.prefix}`} c={c} />;
           }
