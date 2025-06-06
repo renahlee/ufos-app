@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { NavLink } from 'react-router'
+import { Link, NavLink } from 'react-router'
 import { HostContext } from './context'
 import './App.css'
 
@@ -23,7 +23,15 @@ function App({ children }) {
         api:
         {' '}
         <NavLink to="/status">status</NavLink>
-        {' | '}
+        {' '}
+        <Link to={ufosHost} target="_blank" className="external">
+          docs
+        </Link>
+        {' '}
+        <Link to="https://github.com/at-microcosm/links/tree/main/ufos" target="_blank" className="external">
+          source
+        </Link>
+        {' '}
         <label>
           <input
             type="checkbox"
@@ -43,8 +51,19 @@ function App({ children }) {
         <p>Explore lexicons</p>
       </div>
 
-      {children}
+      <div className="content">
+        {children}
+      </div>
 
+      <div className="footer">
+        <p className="from">
+          UFOs is part of
+          {' '}
+          <Link to="https://microcosm.blue" className="external" target="_blank">
+            microcosm
+          </Link>
+        </p>
+      </div>
     </HostContext.Provider>
   )
 }
