@@ -156,7 +156,7 @@ export function Collection({}) {
           using={get_samples}
           args={[host, nsid, 1]}
           ok={samples => samples.length === 0
-            ? <p><em>no records seen</em></p>
+            ? <p><em>no records seen (or all have been deleted)</em></p>
             : showMore
               ? (
                 <>
