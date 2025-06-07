@@ -46,3 +46,6 @@
 .search-input .eg li {
   list-style: none;
 }
+.search-input .eg .contraband {
+  color: hsl(330, 81%, 60%);
+}
