@@ -21,6 +21,9 @@
 .header h1 a {
   color: #fff;
 }
+.header h1 a:hover {
+  color: #64ff6c;
+}
 
 .dev-shortcut {
   opacity: 0.666;

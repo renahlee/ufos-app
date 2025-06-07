@@ -62,6 +62,11 @@ function App({ children }) {
           <Link to="https://microcosm.blue" className="external" target="_blank">
             microcosm
           </Link>
+          ,
+          {' follow at '}
+          <Link to="https://bsky.app/profile/microcosm.blue" className="external" target="_blank">
+            @microcosm.blue
+          </Link>
         </p>
       </div>
     </HostContext.Provider>
