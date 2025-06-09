@@ -127,7 +127,12 @@ function SearchResults({ query }) {
       to={`/collection?nsid=${m.nsid}`}
       className="search-result-item"
     >
-      <span className="bar"><NsidBar n={m.dids_estimate} /></span>
+      <span
+        className="bar"
+        title={`${m.dids_estimate.toLocaleString()} unique user${m.dids_estimate === 1 ? '' : 's'}`}
+      >
+        <NsidBar n={m.dids_estimate} />
+      </span>
       {' '}
       <NsidNice nsid={m.nsid} />
     </Link>

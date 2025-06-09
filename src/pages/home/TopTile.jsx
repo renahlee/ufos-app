@@ -51,7 +51,7 @@ export function TopTile({ rank, nsid, activeCount, change }) {
             display: 'flex',
             alignItems: 'flex-end',
           }}>
-            <Sparkline nsid={nsid} />
+            <Sparkline nsid={nsid} lastSegment={!!change} />
             <p style={{
               margin: '0',
               textAlign: 'right',

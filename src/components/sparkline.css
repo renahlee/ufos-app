@@ -1,0 +1,13 @@
+.sparkline-wrapper {
+  position: relative;
+}
+
+.sparkline-wrapper.week-for-day:before {
+  position: absolute;
+  display: block;
+  content: "";
+  height: 100%;
+  right: 4px;
+  width: calc((100% - 8px) / 6);
+  background: #111;
+}

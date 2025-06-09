@@ -90,7 +90,7 @@ export function Collection({}) {
         }}>
           <div style={{
             width: '12rem',
-            background: '#111',
+            // background: '#111',
           }}>
             <Sparkline nsid={nsid} height={56} />
           </div>
