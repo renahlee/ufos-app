@@ -66,7 +66,7 @@ export function Sparkline({ nsid, metric, height, period, interval, lastSegment 
             data={series[nsid].map(d => d[metric])}
             valueFormatter={v => `${v.toLocaleString()} unique users`}
             height={height ?? 32}
-            color='hsl(280, 94%, 72%)'
+            color='hsl(210, 94%, 63%)'
             showTooltip
             showHighlight
           />
