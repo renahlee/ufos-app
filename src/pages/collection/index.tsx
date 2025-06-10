@@ -93,9 +93,7 @@ export function Collection({}) {
           margin: '0.5rem 0',
           gap: '0.5rem',
         }}>
-          <div style={{
-            width: '12rem',
-          }}>
+          <div className="collection-page-sparkline">
             <Sparkline
               nsid={nsid}
               height={56}
