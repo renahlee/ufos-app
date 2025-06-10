@@ -124,7 +124,7 @@ function SearchResults({ query }) {
   return sorted.map(m => (
     <Link
       key={m.nsid}
-      to={`/collection?nsid=${m.nsid}`}
+      to={`/collection/?nsid=${m.nsid}`}
       className="search-result-item"
     >
       <span

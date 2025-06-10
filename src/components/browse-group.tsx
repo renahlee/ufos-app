@@ -25,7 +25,7 @@ export function BrowseGroup({ prefix, active }) {
       {parents.map(p => (
         <div style={{marginBottom: '0.5rem'}}>
           ↰&nbsp;
-          <Link to={`/collection?prefix=${p}`}>
+          <Link to={`/collection/?prefix=${p}`}>
             <NsidPrefix prefix={p} />
           </Link>
         </div>
@@ -165,7 +165,7 @@ function Collection({ c, active, marker }) {
             {c.nsid}
           </div>
         ) : (
-          <Link to={`/collection?nsid=${c.nsid}`} style={{color: '#888'}}>
+          <Link to={`/collection/?nsid=${c.nsid}`} style={{color: '#888'}}>
             {/*{marker || <>◦&nbsp;</>}*/}
             <NsidName nsid={c.nsid} />
           </Link>
@@ -180,7 +180,7 @@ function SubPrefix({ c, bottom }) {
   return (
     <div>
       <Link
-        to={`/collection?prefix=${c.prefix}`}
+        to={`/collection/?prefix=${c.prefix}`}
         style={{color: '#888'}}
         onClick={e => {
           if (!bottom) {
