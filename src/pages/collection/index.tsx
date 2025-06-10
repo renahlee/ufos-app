@@ -7,7 +7,7 @@ import { niceDt } from '../../components/nice';
 import { Sparkline } from '../../components/sparkline';
 import { Record } from '../../components/record';
 import { ButtonGroup } from '../../components/buttons';
-import { Fetch } from '../../fetch';
+import { Fetch, GetJson } from '../../fetch';
 import './collection.css';
 
 // TODO refactor out with what-hot (/top collections, ...)
@@ -15,14 +15,6 @@ const ONE_HOUR_MS = 60 * 60 * 1000;
 const ONE_DAY_MS = ONE_HOUR_MS * 24;
 const ONE_WEEK_MS = ONE_DAY_MS * 7;
 const ONE_MONTH_MS = ONE_WEEK_MS * 4;
-
-async function get_samples(host, nsid, limit) {
-  const res = await fetch(`${host}/records?collection=${nsid}&limit=${limit}`);
-  if (!res.ok) {
-    throw new Error(`request failed: ${res}`);
-  }
-  return await res.json();
-}
 
 async function get_collection_stat(host, nsid, period) {
   const now_ms = +new Date();
@@ -164,9 +156,9 @@ export function Collection({}) {
         <h3 style={{margin: '2rem 0 1rem'}}>
           {showMore ? 'Sample records' : 'Sample record: latest'}
         </h3>
-        <Fetch
-          using={get_samples}
-          args={[host, nsid, 1]}
+        <GetJson
+          endpoint="/records"
+          params={{ collection: nsid, limit: 1 }}
           ok={samples => samples.length === 0
             ? <p><em>no records seen (or all have been deleted)</em></p>
             : showMore

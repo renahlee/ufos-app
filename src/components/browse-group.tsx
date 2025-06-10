@@ -1,20 +1,10 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router';
-import { HostContext } from '../context';
-import { Fetch } from '../fetch';
+import { GetJson } from '../fetch';
 import { NsidName, NsidPrefix, NsidBar } from './nsid';
 import './browse-group.css';
 
-async function get_prefix(host, prefix) {
-  let res = await fetch(`${host}/prefix?prefix=${prefix}`);
-  if (!res.ok) {
-    throw new Error(`request failed: ${await res.text()}`);
-  }
-  return await res.json();
-}
-
 export function BrowseGroup({ prefix, active }) {
-  const host = useContext(HostContext);
   const segments = prefix.split('.');
   const parents = [];
   for (let i = segments.length - 1; i >= 2; i--) {
@@ -30,9 +20,9 @@ export function BrowseGroup({ prefix, active }) {
           </Link>
         </div>
       ))}
-      <Fetch
-        using={get_prefix}
-        args={[host, prefix]}
+      <GetJson
+        endpoint="/prefix"
+        params={{ prefix }}
         ok={group => <Group group={group} active={active} />}
         todo="paging"
       />
@@ -204,13 +194,12 @@ function SubPrefix({ c, bottom }) {
 }
 
 export function BrowseSubGroup({ prefix }) {
-  const host = useContext(HostContext);
   return (
     <div className="browse-group-sub">
       <div>
-        <Fetch
-          using={get_prefix}
-          args={[host, prefix]}
+        <GetJson
+          endpoint="/prefix"
+          params={{ prefix }}
           ok={group => <SubGroup group={group} />}
         />
       </div>
