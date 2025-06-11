@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { HostContext } from '../../context';
-import { Navigate, useSearchParams } from 'react-router';
+import { Link, Navigate, useSearchParams } from 'react-router';
 import { BrowseGroup } from '../../components/browse-group';
 import { NsidNice, NsidPrefix } from '../../components/nsid';
 import { niceDt } from '../../components/nice';
@@ -48,6 +48,17 @@ export function Collection({}) {
     month: 'quarter',
   }[statPeriod];
   const sparkMetric = statType === 'estimated_dids' ? 'dids_estimate' : countType;
+
+  const browseAll = (
+    <div className="browse-all">
+      <hr />
+      →&nbsp;
+      <Link to="/all">
+        browse <em>all</em> lexicons
+      </Link>
+    </div>
+  );
+
   if (!nsid) {
     const prefix = nsid ? null : searchParams.get('prefix');
     if (!prefix) return <Navigate replace to="/" />;
@@ -56,6 +67,7 @@ export function Collection({}) {
         <div className="collection-page-sidebar">
           <h3>Related lexicons</h3>
           <BrowseGroup prefix={prefix} />
+          {browseAll}
         </div>
         <div className="collection-page-content">
           <h2>
@@ -74,6 +86,7 @@ export function Collection({}) {
       <div className="collection-page-sidebar">
         <h3>Related lexicons</h3>
         <BrowseGroup prefix={nsidPrefix} active={nsid} />
+        {browseAll}
       </div>
       <div className="collection-page-content">
         <h2>

@@ -20,7 +20,7 @@ export function GetJson({ endpoint, params, ...forFetch }) {
   return (
     <Fetch
       using={getJson}
-      args={[url]}
+      args={[url.toString()]}
       {...forFetch}
     />
   );
