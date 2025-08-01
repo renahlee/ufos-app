@@ -1,5 +1,5 @@
-import { createContext } from 'react';
+import { createContext } from "react";
 
-const HostContext = createContext(null);
+const HostContext = createContext<string | null>(null);
 
 export { HostContext };
